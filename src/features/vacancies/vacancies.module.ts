@@ -13,7 +13,7 @@ import { GetAllVacanciesPublicHandler } from './Public/queries/get-all-vacancies
 import { GetOneVacancyPublicHandler } from './Public/queries/get-one-vacancies/get-one-vacancies.handler';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Vacancies]), CqrsModule],
+  imports: [TypeOrmModule.forFeature([Vacancies])],
   controllers: [VacanciesAdminController, VacanciesPublicController],
   providers: [
     GetAllVacanciesHandler,

@@ -12,25 +12,25 @@ export class UpdateVacanciesHandler implements ICommandHandler<UpdateVacanciesCo
     if (!vacancy) {
       throw new NotFoundException('Vacancy with given id not found');
     }
-    if (command.title !== undefined) {
+    if (command.title) {
       vacancy.title = command.title;
     }
-    if (command.address !== undefined) {
+    if (command.address) {
       vacancy.address = command.address;
     }
-    if (command.description !== undefined) {
+    if (command.description) {
       vacancy.description = command.description;
     }
-    if (command.phoneNumber !== undefined) {
+    if (command.phoneNumber) {
       vacancy.phoneNumber = command.phoneNumber;
     }
-    if (command.type !== undefined) {
+    if (command.type) {
       vacancy.type = command.type;
     }
-    if (command.salary !== undefined) {
+    if (command.salary) {
       vacancy.salary = command.salary;
     }
-    if (command.isActive !== undefined) {
+    if (command.isActive) {
       vacancy.isActive = command.isActive;
     }
 

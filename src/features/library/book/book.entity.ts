@@ -5,14 +5,14 @@ import {BaseModel} from "@/core/base-model";
 
 @Entity('book')
 export class Book extends BaseModel {
-    @Column()
-    authorId: number;
+  @Column()
+  authorId: number;
 
-    @Column()
-    categoryId : number
+  @Column()
+  categoryId : number
 
-    @Column({ type: 'varchar', length: 256 })
-    title: string;
+  @Column({ type: 'varchar', length: 256 })
+  title: string;
 
     @Column({ type: 'varchar', length: 128 })
     image: string;

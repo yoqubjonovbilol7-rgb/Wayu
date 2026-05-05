@@ -1,5 +1,6 @@
 import {IsInt, IsOptional, IsString, MaxLength} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
+import { Type } from 'class-transformer';
 
 export class CreateBooksRequest {
     @IsInt()
@@ -25,6 +26,7 @@ export class CreateBooksRequest {
     pages!: number;
 
     @IsInt()
+    @Type(() => Number)
     @ApiProperty()
     year!: number;
 }

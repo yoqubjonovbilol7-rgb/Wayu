@@ -4,10 +4,12 @@ import {ApplicationsController} from "@/features/careers/applications/Admin/appl
 import {CreateApplicationsHandler} from "@/features/careers/applications/Admin/commands/create-applications/create-applications.handler";
 import {DeleteApplicationsHandler} from "@/features/careers/applications/Admin/commands/delete-applications/delete-applications.handler";
 import {UpdateApplicationsHandler} from "@/features/careers/applications/Admin/commands/update-applications/update-applications.handler";
-import {ApplicationsPublicController} from "@/features/careers/applications/Public/applications.public.controller";
-import {GetAllApplicationsPublicHandler} from "@/features/careers/applications/Public/queries/get-all-applications/get-all-applications.handler";
-import {GetOneApplicationPublicHandler} from "@/features/careers/applications/Public/queries/get-one-applications/get-one-applications.handler";
-import {VacanciesAdminController} from "@/features/careers/vacancies/Admin/vacancies.admin.controller";
+import { ApplicationsPublicController } from "@/features/careers/applications/Public/applications.public.controller";
+import { GetAllApplicationsPublicHandler } from "@/features/careers/applications/Public/queries/get-all-applications/get-all-applications.handler";
+import { GetOneApplicationPublicHandler } from "@/features/careers/applications/Public/queries/get-one-applications/get-one-applications.handler";
+import { GetAllApplicationsHandler } from "@/features/careers/applications/Admin/queries/get-all-applications/get-all-applications.handler";
+import { GetOneApplicationsHandler } from "@/features/careers/applications/Admin/queries/get-one-applications/get-one-applications.handler";
+import { VacanciesAdminController } from "@/features/careers/vacancies/Admin/vacancies.admin.controller";
 import {CreateVacanciesHandler} from "@/features/careers/vacancies/Admin/commands/create-vacancies/create-vacancies.handler";
 import {UpdateVacanciesHandler} from "@/features/careers/vacancies/Admin/commands/update-vacancies/update-vacancies.handler";
 import {DeleteVacanciesHandler} from "@/features/careers/vacancies/Admin/commands/delete-vacancies/delete-vacancies.handler";
@@ -27,6 +29,8 @@ import {Vacancies} from "@/features/careers/vacancies/vacancies.entity";
     CreateApplicationsHandler,
     DeleteApplicationsHandler,
     UpdateApplicationsHandler,
+    GetAllApplicationsHandler,
+    GetOneApplicationsHandler,
     GetAllApplicationsPublicHandler,
     GetOneApplicationPublicHandler,
     CreateVacanciesHandler,

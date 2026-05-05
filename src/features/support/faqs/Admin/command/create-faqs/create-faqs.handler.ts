@@ -4,7 +4,8 @@ import { ILike } from 'typeorm';
 import { BadRequestException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import {Faq} from "@/features/support/faqs/faqs.entity";
+import { Faq } from '@/features/support/faqs/faqs.entity';
+
 
 
 @CommandHandler(CreateFaqsCommand)
