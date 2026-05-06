@@ -1,6 +1,6 @@
 import {Body, Controller, Post, Get, Param, Delete, Put, ParseIntPipe, Patch, Query} from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiTags, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiResponse, ApiBody } from '@nestjs/swagger';
 
 import { CreateSocialLinksCommand } from '@/features/info/social-links/Admin/commands/create-social-links/create-social-links.command';
 import { CreateSocialLinksResponse } from '@/features/info/social-links/Admin/commands/create-social-links/create-social-links.response';

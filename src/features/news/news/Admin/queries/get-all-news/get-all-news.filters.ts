@@ -1,37 +1,19 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEnum, IsInt, IsOptional, IsString, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import {IsInt, IsOptional, } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class GetAllNewsFilters {
-  @ApiPropertyOptional({ example: 1 })
+  @ApiProperty()
   @Type(() => Number)
   @IsOptional()
   @IsInt()
-  @Min(1)
   page = 1;
 
-  @ApiPropertyOptional({ example: 10 })
+  @ApiProperty()
   @Type(() => Number)
   @IsOptional()
   @IsInt()
-  @Min(1)
-  limit : number;
+  size : number;
 
-  @ApiPropertyOptional({ example: 'economy' })
-  @IsOptional()
-  @IsString()
-  search?: string;
-
-  @ApiPropertyOptional({ example: 1 })
-  @Type(() => Number)
-  @IsOptional()
-  @IsInt()
-  categoryId?: number;
-
-  @ApiPropertyOptional({ example: 2 })
-  @Type(() => Number)
-  @IsOptional()
-  @IsInt()
-  countryId?: number;
 
 }

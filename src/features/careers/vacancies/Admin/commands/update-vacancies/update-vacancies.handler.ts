@@ -6,13 +6,13 @@ import {
     UpdateVacanciesCommand
 } from "@/features/careers/vacancies/Admin/commands/update-vacancies/update-vacancies.command";
 import {
-    UpdateVacanciesResponse
+    UpdateCareersVacanciesResponse
 } from "@/features/careers/vacancies/Admin/commands/update-vacancies/update-vacancies.response";
 
 @CommandHandler(UpdateVacanciesCommand)
 export class UpdateVacanciesHandler implements ICommandHandler<UpdateVacanciesCommand> {
 
-    async execute(command: UpdateVacanciesCommand): Promise<UpdateVacanciesResponse> {
+    async execute(command: UpdateVacanciesCommand): Promise<UpdateCareersVacanciesResponse> {
         const vacancy = await Vacancies.findOne({where: {id : command.id}});
         if (!vacancy) {
             throw new NotFoundException('Vacancy with given id not found');
@@ -40,6 +40,6 @@ export class UpdateVacanciesHandler implements ICommandHandler<UpdateVacanciesCo
         }
 
         const updatedVacancy = await vacancy.save();
-        return plainToInstance(UpdateVacanciesResponse, updatedVacancy, {excludeExtraneousValues: true});
+        return plainToInstance(UpdateCareersVacanciesResponse, updatedVacancy, {excludeExtraneousValues: true});
     }
 }

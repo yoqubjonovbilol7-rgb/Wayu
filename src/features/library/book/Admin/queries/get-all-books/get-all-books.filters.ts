@@ -13,5 +13,5 @@ export class GetAllBooksFilters {
     @Type(() => Number)
     @IsOptional()
     @ApiProperty({required: false})
-    limit?: number;
+    size?: number;
 }

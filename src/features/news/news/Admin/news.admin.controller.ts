@@ -11,8 +11,7 @@ import { DeleteNewsCommand } from '@/features/news/news/Admin/commands/delete-ne
 import { GetAllNewsFilters } from '@/features/news/news/Admin/queries/get-all-news/get-all-news.filters';
 import { GetAllNewsQuery } from '@/features/news/news/Admin/queries/get-all-news/get-all-news.query';
 import { GetOneNewsQuery } from '@/features/news/news/Admin/queries/get-one-news/get-one-news.query';
-import { GetAllNewsResponse } from '@/features/news/news/Admin/queries/get-all-news/get-all-news.response';
-import { GetOneNewsResponse } from '@/features/news/news/Admin/queries/get-one-news/get-one-news.response';
+import {NewsItemResponse } from '@/features/news/news/Admin/queries/get-all-news/get-all-news.response';
 import * as fs from 'fs';
 
 
@@ -24,7 +23,7 @@ export class NewsAdminController {
   ) {}
 
   @Post()
-  @ApiCreatedResponse({ type: GetOneNewsResponse })
+  @ApiCreatedResponse({ type: NewsItemResponse })
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
     FileInterceptor('image', multerOptions),
@@ -54,20 +53,20 @@ export class NewsAdminController {
   }
 
   @Get()
-  @ApiOkResponse({ type: GetAllNewsResponse })
+  @ApiOkResponse({ type: NewsItemResponse })
   async getAllNews(@Query() filters: GetAllNewsFilters) {
     return this.queryBus.execute(new GetAllNewsQuery(filters));
   }
 
   @Get(':id')
-  @ApiOkResponse({ type: GetOneNewsResponse })
+  @ApiOkResponse({ type: NewsItemResponse })
   @ApiNotFoundResponse()
   async getOneNews(@Param('id', ParseIntPipe) id: number) {
     return this.queryBus.execute(new GetOneNewsQuery(id));
   }
 
   @Patch(':id')
-  @ApiOkResponse({ type: GetOneNewsResponse })
+  @ApiOkResponse({ type: NewsItemResponse })
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image', multerOptions))
   async updateNews(

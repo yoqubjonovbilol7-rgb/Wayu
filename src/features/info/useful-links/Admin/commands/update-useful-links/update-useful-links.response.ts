@@ -3,7 +3,7 @@ import {ApiProperty} from "@nestjs/swagger";
 
 export class UpdateUsefulLinksResponse {
   @Expose()
-  @ApiProperty({ example: 1 })
+  @ApiProperty()
   id: number;
 
   @Expose()

@@ -16,8 +16,8 @@ export class CreateBooksHandler implements ICommandHandler<CreateBooksCommand> {
       description: command.description,
       pages: command.pages,
       year: command.year,
-      image: command.imagePath,
-      file: command.filePath,
+      image: command.imagePath.path,
+      file: command.filePath.path
     } as Book);
     await Book.save(newBook);
 

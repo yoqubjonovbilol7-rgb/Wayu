@@ -1,19 +1,17 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsInt, IsOptional, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsInt, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class GetAllStaticInfoPublicFilters {
-  @ApiPropertyOptional({ example: 1 })
+  @ApiProperty()
   @Type(() => Number)
   @IsOptional()
   @IsInt()
-  @Min(1)
-  page = 1;
+  page;
 
-  @ApiPropertyOptional({ example: 10 })
+  @ApiProperty()
   @Type(() => Number)
   @IsOptional()
   @IsInt()
-  @Min(1)
-  limit = 10;
+  size;
 }

@@ -33,10 +33,6 @@ export class UpdateEventsRequest {
     address?: string;
 
     @IsOptional()
-    @ApiProperty({
-        type: 'string',
-        format: 'binary',
-        required: false
-    })
+    @ApiProperty({ type: 'string', format: 'binary', required: false })
     image?: string;
 }

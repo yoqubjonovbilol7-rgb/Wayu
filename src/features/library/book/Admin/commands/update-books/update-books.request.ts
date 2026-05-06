@@ -32,4 +32,11 @@ export class UpdateBooksRequest {
     @IsOptional()
     @ApiProperty({required: false})
     year?: number;
+
+  @ApiProperty({ type: 'string', format: 'binary' })
+  imagePath!: Express.Multer.File;
+
+
+  @ApiProperty({ type: 'string', format: 'binary' })
+  filePath!: Express.Multer.File;
 }

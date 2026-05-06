@@ -21,6 +21,13 @@ export class CreateBooksRequest {
     @ApiProperty({required: false})
     description?: string;
 
+    @ApiProperty({ type: 'string', format: 'binary' })
+    imagePath!: Express.Multer.File;
+
+
+    @ApiProperty({ type: 'string', format: 'binary' })
+    filePath!: Express.Multer.File;
+
     @IsInt()
     @ApiProperty()
     pages!: number;

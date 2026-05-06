@@ -1,7 +1,7 @@
 import {Expose} from 'class-transformer';
 import {ApiProperty} from "@nestjs/swagger";
 
-export class CreateVacanciesResponse {
+export class CreateCareersVacanciesResponse {
     @Expose()
     @ApiProperty()
     id!: number;

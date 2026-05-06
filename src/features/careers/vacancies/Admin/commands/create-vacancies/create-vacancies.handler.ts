@@ -1,5 +1,5 @@
 import {CreateVacanciesCommand} from './create-vacancies.command';
-import {CreateVacanciesResponse} from './create-vacancies.response';
+import {CreateCareersVacanciesResponse} from './create-vacancies.response';
 import {BadRequestException} from "@nestjs/common";
 import {plainToInstance} from "class-transformer";
 import {CommandHandler, ICommandHandler} from "@nestjs/cqrs";
@@ -8,7 +8,7 @@ import {Vacancies} from "@/features/careers/vacancies/vacancies.entity";
 @CommandHandler(CreateVacanciesCommand)
 export class CreateVacanciesHandler implements ICommandHandler<CreateVacanciesCommand> {
 
-    async execute(command: CreateVacanciesCommand): Promise<CreateVacanciesResponse> {
+    async execute(command: CreateVacanciesCommand): Promise<CreateCareersVacanciesResponse> {
         const newVacancy = Vacancies.create({
             title: command.title,
             address: command.address,
@@ -21,6 +21,6 @@ export class CreateVacanciesHandler implements ICommandHandler<CreateVacanciesCo
         
         await Vacancies.save(newVacancy);
 
-        return plainToInstance(CreateVacanciesResponse, newVacancy, {excludeExtraneousValues: true});
+        return plainToInstance(CreateCareersVacanciesResponse, newVacancy, {excludeExtraneousValues: true});
     }
 }

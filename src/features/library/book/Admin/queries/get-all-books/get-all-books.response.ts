@@ -38,13 +38,3 @@ export class BooksResponse {
     @ApiProperty()
     year!: number;
 }
-
-export class GetAllBooksResponse {
-    @Expose()
-    @ApiProperty({type: [BooksResponse]})
-    data!: BooksResponse[];
-
-    @Expose()
-    @ApiProperty()
-    total!: number;
-}

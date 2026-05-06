@@ -11,7 +11,7 @@ import {UpdateApplicationsResponse} from "@/features/careers/applications/Admin/
 
 @CommandHandler(UpdateApplicationsCommand)
 export class UpdateApplicationsHandler implements ICommandHandler<UpdateApplicationsCommand> {
-  async execute(cmd: UpdateApplicationsCommand,): Promise<UpdateApplicationsResponse> {
+  async execute(cmd: UpdateApplicationsCommand): Promise<UpdateApplicationsResponse> {
 
     const application = await Applications.findOne({where: { id: cmd.id },});
 

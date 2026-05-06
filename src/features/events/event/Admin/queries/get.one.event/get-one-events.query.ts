@@ -1,7 +1,7 @@
 import {Query} from "@nestjs/cqrs";
-import {GetAllEventsResponse} from "@/features/events/event/Admin/queries/get.one.event/get-all-events.response";
+import {GetOneEventsResponse} from "@/features/events/event/Admin/queries/get.one.event/get-one-events.response";
 
-export class GetOneEventsQuery extends Query<GetAllEventsResponse>{
+export class GetOneEventsQuery extends Query<GetOneEventsResponse>{
     constructor(public readonly id: number) {
         super();
     }

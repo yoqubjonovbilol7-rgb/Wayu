@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class RepresentativePublicResponse {
+export class GetAllRepresentativesPublicResponse{
   @Expose()
   @ApiProperty()
   id!: number;
@@ -25,14 +25,4 @@ export class RepresentativePublicResponse {
   @Expose()
   @ApiProperty()
   created!: string;
-}
-
-export class GetAllRepresentativesPublicResponse {
-  @Expose()
-  @ApiProperty({ type: [RepresentativePublicResponse] })
-  data!: RepresentativePublicResponse[];
-
-  @Expose()
-  @ApiProperty()
-  total!: number;
 }

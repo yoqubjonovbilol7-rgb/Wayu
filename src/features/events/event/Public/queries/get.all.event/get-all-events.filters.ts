@@ -4,21 +4,12 @@ import { IsInt, IsOptional, IsString } from "class-validator";
 export class GetAllEventsFilters {
     @IsInt()
     @IsOptional()
-    @ApiProperty({ required: false, default: 1 })
+    @ApiProperty({ required: false })
     page?: number;
 
     @IsInt()
     @IsOptional()
-    @ApiProperty({ required: false, default: 10 })
+    @ApiProperty({ required: false })
     size?: number;
 
-    @IsInt()
-    @IsOptional()
-    @ApiProperty({ required: false })
-    categoryId?: number;
-
-    @IsString()
-    @IsOptional()
-    @ApiProperty({ required: false })
-    search?: string;
 }

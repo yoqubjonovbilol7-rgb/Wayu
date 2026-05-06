@@ -31,25 +31,3 @@ export class NewsItemResponse {
   countryId?: number;
 }
 
-export class GetAllNewsResponse {
-  @Expose()
-  @ApiProperty({ type: [NewsItemResponse] })
-  @Type(() => NewsItemResponse)
-  data!: NewsItemResponse[];
-
-  @Expose()
-  @ApiProperty()
-  total!: number;
-
-  @Expose()
-  @ApiProperty()
-  page!: number;
-
-  @Expose()
-  @ApiProperty()
-  limit!: number;
-
-  @Expose()
-  @ApiProperty()
-  totalPages!: number;
-}

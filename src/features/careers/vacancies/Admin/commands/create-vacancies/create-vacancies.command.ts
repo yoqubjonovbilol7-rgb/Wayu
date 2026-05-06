@@ -1,8 +1,8 @@
 import {Command} from "@nestjs/cqrs";
-import {CreateVacanciesResponse} from "@/features/careers/vacancies/Admin/commands/create-vacancies/create-vacancies.response";
+import {CreateCareersVacanciesResponse} from "@/features/careers/vacancies/Admin/commands/create-vacancies/create-vacancies.response";
 
 
-export class CreateVacanciesCommand extends Command<CreateVacanciesResponse> {
+export class CreateVacanciesCommand extends Command<CreateCareersVacanciesResponse> {
     constructor(
         public title: string,
         public address: string,

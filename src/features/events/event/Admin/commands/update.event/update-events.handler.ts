@@ -16,6 +16,7 @@ export class UpdateEventsHandler implements ICommandHandler<UpdateEventCommand> 
         if (!event) {
             throw new NotFoundException(`ID ${cmd.id}  topilmadi`);
         }
+
         if (cmd.image && event.image) {
             const oldFilePath = path.join(process.cwd(), 'uploads', event.image);
             if (fs.existsSync(oldFilePath)) {

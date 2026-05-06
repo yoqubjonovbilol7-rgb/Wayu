@@ -18,17 +18,4 @@ export class StaticInfoPublicResponse {
   @ApiProperty()
   aboutUs!: string;
 
-  @Expose()
-  @ApiProperty()
-  created!: string;
-}
-
-export class GetAllStaticInfoPublicResponse {
-  @Expose()
-  @ApiProperty({ type: [StaticInfoPublicResponse] })
-  data!: StaticInfoPublicResponse[];
-
-  @Expose()
-  @ApiProperty()
-  total!: number;
 }

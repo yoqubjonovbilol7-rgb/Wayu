@@ -14,5 +14,5 @@ export class UpdateCountriesRequest {
 
     @ApiProperty({ type: 'string', format: 'binary' })
     @IsOptional()
-    flag? : any
+    flag? : Express.Multer.File
 }

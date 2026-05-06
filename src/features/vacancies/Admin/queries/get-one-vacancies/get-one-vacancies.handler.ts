@@ -10,7 +10,7 @@ export class GetOneVacanciesHandler implements IQueryHandler<GetOneVacanciesQuer
   async execute(query: GetOneVacanciesQuery): Promise<GetOneVacanciesResponse> {
     const vacancy = await Vacancies.findOne({ where: { id: query.id } });
     if (!vacancy) {
-      throw new NotFoundException(`Vacancy with id ${query.id} not found`);
+      throw new NotFoundException(`Vacancy with  not found`);
     }
 
     return plainToInstance(GetOneVacanciesResponse, vacancy, { excludeExtraneousValues: true });

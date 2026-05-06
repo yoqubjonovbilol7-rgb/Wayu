@@ -12,7 +12,7 @@ export class GetOneVacancyPublicHandler implements IQueryHandler<GetOneVacancyPu
       where: { id: query.id, isActive: true },
     });
     if (!vacancy) {
-      throw new NotFoundException(`Vacancy with id ${query.id} not found`);
+      throw new NotFoundException(`Vacancy with  not found`);
     }
 
     return plainToInstance(GetOneVacancyPublicResponse, vacancy, { excludeExtraneousValues: true });

@@ -3,17 +3,15 @@ import { IsInt, IsOptional, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class GetAllRepresentativesPublicFilters {
-  @ApiPropertyOptional({ example: 1 })
+  @ApiPropertyOptional()
   @Type(() => Number)
   @IsOptional()
   @IsInt()
-  @Min(1)
-  page = 1;
+  page :number;
 
-  @ApiPropertyOptional({ example: 10 })
+  @ApiPropertyOptional()
   @Type(() => Number)
   @IsOptional()
   @IsInt()
-  @Min(1)
-  limit = 10;
+  size : number ;
 }

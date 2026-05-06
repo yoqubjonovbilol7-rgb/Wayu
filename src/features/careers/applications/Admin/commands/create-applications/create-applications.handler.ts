@@ -1,13 +1,16 @@
-import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
-import { NotFoundException } from "@nestjs/common";
-import { plainToInstance } from "class-transformer";
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import {
+  CreateApplicationsCommand
+} from '@/features/careers/applications/Admin/commands/create-applications/create-applications.command';
+import {
+  CreateApplicationResponse
+} from '@/features/careers/applications/Admin/commands/create-applications/create-applications.response';
+import { Vacancies } from '@/features/vacancies/vacancies.entity';
+import { NotFoundException } from '@nestjs/common';
+import { Applications } from '@/features/careers/applications/applications.entity';
+import { ApplicationStatus } from '@/core/enums/paymentProvider.enum';
+import { plainToInstance } from 'class-transformer';
 
-import { CreateApplicationsCommand } from "./create-applications.command";
-import { CreateApplicationResponse } from "@/features/careers/applications/Admin/commands/create-applications/create-applications.response";
-
-import { Vacancies } from "@/features/careers/vacancies/vacancies.entity";
-import { Applications } from "@/features/careers/applications/applications.entity";
-import {ApplicationStatus} from "@/core/enums/paymentProvider.enum";
 
 @CommandHandler(CreateApplicationsCommand)
 export class CreateApplicationsHandler implements ICommandHandler<CreateApplicationsCommand> {

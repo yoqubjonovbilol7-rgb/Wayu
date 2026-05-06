@@ -15,13 +15,4 @@ export class GetAllVacanciesFilters {
   @IsOptional()
   @ApiProperty({ required: false })
   size?: number;
-
-  @IsEnum(VacancyType)
-  @IsOptional()
-  @ApiProperty({ enum: VacancyType, required: false })
-  type?: VacancyType;
-
-  @IsOptional()
-  @ApiProperty({ required: false })
-  isActive?: boolean;
 }

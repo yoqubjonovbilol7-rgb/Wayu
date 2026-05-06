@@ -1,5 +1,5 @@
-import { Command } from "@nestjs/cqrs";
-import { CreateBooksResponse } from "./create-books.response";
+import { Command } from '@nestjs/cqrs';
+import { CreateBooksResponse } from '@/features/library/book/Admin/commands/create-books/create-books.response';
 
 export class CreateBooksCommand extends Command<CreateBooksResponse> {
   constructor(
@@ -8,8 +8,8 @@ export class CreateBooksCommand extends Command<CreateBooksResponse> {
     public title: string,
     public pages: number,
     public year: number,
-    public imagePath: string,
-    public filePath: string,
+    public imagePath: Express.Multer.File,
+    public filePath: Express.Multer.File,
     public description?: string,
   ) {
     super();

@@ -1,7 +1,7 @@
 import {Expose} from "class-transformer";
 import {ApiProperty} from "@nestjs/swagger";
 
-export class GetAllEventsResponse {
+export class GetOneEventsResponse {
     @Expose()
     @ApiProperty()
     id!: number;

@@ -16,9 +16,7 @@ export class DeleteApplicationsHandler implements ICommandHandler<DeleteApplicat
     if (!application) {
       throw new NotFoundException("Application not found");
     }
-    if (application.resume && fs.existsSync(application.resume)) {
-      fs.unlinkSync(application.resume);
-    }
+
     await Applications.remove(application);
 
   }

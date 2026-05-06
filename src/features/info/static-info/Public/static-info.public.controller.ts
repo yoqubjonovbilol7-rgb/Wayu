@@ -2,7 +2,6 @@ import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { GetAllStaticInfoPublicQuery } from './queries/get-all-static-info/get-all-static-info.query';
-import { GetAllStaticInfoPublicResponse } from './queries/get-all-static-info/get-all-static-info.response';
 import { GetAllStaticInfoPublicFilters } from './queries/get-all-static-info/get-all-static-info.filters';
 import { GetOneStaticInfoPublicQuery } from './queries/get-one-static-info/get-one-static-info.query';
 import { GetOneStaticInfoPublicResponse } from './queries/get-one-static-info/get-one-static-info.response';
@@ -12,7 +11,7 @@ export class StaticInfoPublicController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get()
-  @ApiOkResponse({ type: GetAllStaticInfoPublicResponse })
+  @ApiOkResponse({ type: GetOneStaticInfoPublicResponse })
   async getAll(@Query() filters: GetAllStaticInfoPublicFilters) {
     return this.queryBus.execute(new GetAllStaticInfoPublicQuery(filters));
   }

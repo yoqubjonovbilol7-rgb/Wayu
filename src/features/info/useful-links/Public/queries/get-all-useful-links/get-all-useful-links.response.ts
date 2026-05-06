@@ -18,17 +18,4 @@ export class UsefulLinkPublicResponse {
   @ApiProperty()
   link!: string;
 
-  @Expose()
-  @ApiProperty()
-  created!: string;
-}
-
-export class GetAllUsefulLinksPublicResponse {
-  @Expose()
-  @ApiProperty({ type: [UsefulLinkPublicResponse] })
-  data!: UsefulLinkPublicResponse[];
-
-  @Expose()
-  @ApiProperty()
-  total!: number;
 }

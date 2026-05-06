@@ -10,13 +10,13 @@ export class CreateRepresentativesHandler implements ICommandHandler<CreateRepre
 
     async execute(cmd: CreateRepresentativesCommand): Promise<CreateRepresentativesResponse> {
 
-        if (!cmd.image || !cmd.image.filename) {
+        if (!cmd.image) {
             throw new BadRequestException('Rasm yuklanishi shart');
         }
 
         const newRepresentative = Representatives.create({
             fullName: cmd.fullName,
-            image: cmd.image.filename,
+            image: cmd.image.path,
             email: cmd.email,
             phoneNumber: cmd.phoneNumber,
             resume: cmd.resume

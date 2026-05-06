@@ -28,8 +28,8 @@ import { storageOptions } from "@/config/multer.config";
 
 import { GetOneBooksAdminQuery } from "@/features/library/book/Admin/queries/get-one-books/get-one-books-admin.query";
 import { GetAllBooksFilters } from "@/features/library/book/Admin/queries/get-all-books/get-all-books.filters";
-import { GetAllBooksResponse } from "@/features/library/book/Admin/queries/get-all-books/get-all-books.response";
 import { GetAllBooksQuery } from "@/features/library/book/Admin/queries/get-all-books/get-all-books.query";
+import { BooksResponse } from '@/features/library/book/Admin/queries/get-all-books/get-all-books.response';
 
 @Controller("admin/books")
 export class BooksController {
@@ -67,8 +67,8 @@ export class BooksController {
       payload.title,
       payload.pages,
       payload.year,
-      image.path,
-      file.path,
+      image,
+      file,
       payload.description,
     );
 
@@ -89,7 +89,7 @@ export class BooksController {
 
 
   @Get()
-  @ApiOkResponse({ type: [GetAllBooksResponse] })
+  @ApiOkResponse({ type: [BooksResponse] })
   async getAll(@Query() filters: GetAllBooksFilters) {
     return this.queryBus.execute(new GetAllBooksQuery(filters));
   }
@@ -103,9 +103,15 @@ export class BooksController {
   @ApiConsumes("multipart/form-data")
   @UseInterceptors(
     FileFieldsInterceptor(
-      [{ name: "image" }, { name: "file" }],
-      { storage: storageOptions, limits: { fileSize: 1024 * 1024 * 5 } }
-    )
+      [
+        { name: "image", maxCount: 1 },
+        { name: "file", maxCount: 1 },
+      ],
+      {
+        storage: storageOptions,
+        limits: { fileSize: 5 * 1024 * 1024 },
+      },
+    ),
   )
   async update(
     @Param("id", ParseIntPipe) id: number,
@@ -124,8 +130,8 @@ export class BooksController {
       payload.description,
       payload.pages,
       payload.year,
-      files?.image?.[0]?.path,
-      files?.file?.[0]?.path,
+      files?.image?.[0],
+      files?.file?.[0],
     );
 
     return this.commandBus.execute(cmd);

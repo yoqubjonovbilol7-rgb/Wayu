@@ -1,22 +1,25 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { EntityManager } from 'typeorm';
-import { UsefulLinks } from '@/features/info/useful-links/usefulLinks.entity';
-import { GetAllUsefulLinksPublicQuery } from './get-all-useful-links.query';
-import { GetAllUsefulLinksPublicResponse } from './get-all-useful-links.response';
 import { plainToInstance } from 'class-transformer';
 
-@QueryHandler(GetAllUsefulLinksPublicQuery)
-export class GetAllUsefulLinksPublicHandler implements IQueryHandler<GetAllUsefulLinksPublicQuery> {
-  constructor(private readonly manager: EntityManager) {}
+import { UsefulLinks } from '@/features/info/useful-links/usefulLinks.entity';
+import { GetAllUsefulLinksPublicQuery } from './get-all-useful-links.query';
+import { UsefulLinkPublicResponse } from './get-all-useful-links.response';
 
-  async execute(query: GetAllUsefulLinksPublicQuery): Promise<GetAllUsefulLinksPublicResponse> {
-    const { page = 1, limit = 10 } = query.filters;
-    const [data, total] = await this.manager.findAndCount(UsefulLinks, {
-      take: limit,
-      skip: (page - 1) * limit,
-      order: { created: 'DESC' },
+
+@QueryHandler(GetAllUsefulLinksPublicQuery) export class GetAllUsefulLinksPublicHandler implements IQueryHandler<GetAllUsefulLinksPublicQuery> {
+
+  async execute(query: GetAllUsefulLinksPublicQuery) : Promise<UsefulLinkPublicResponse[]> {
+    const take = query.filters.size ?? 10;
+    const currentPage = query.filters.page ?? 1;
+    const skip = (currentPage - 1) * take;
+
+    const data = await UsefulLinks.find({
+      skip : skip,
+      take: take,
+
     });
 
-    return plainToInstance(GetAllUsefulLinksPublicResponse, { data, total }, { excludeExtraneousValues: true });
+    return plainToInstance(UsefulLinkPublicResponse , data, { excludeExtraneousValues: true,
+    });
   }
 }

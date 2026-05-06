@@ -25,8 +25,7 @@ export class CreateBranchesHandler implements ICommandHandler<CreateBranchesComm
             throw new BadRequestException("Bunday country mavjud emas");
         }
 
-        const representative = await Representatives.findOne({
-            where: { id: command.representativeId }
+        const representative = await Representatives.findOne({ where: { id: command.representativeId }
         });
 
         if (!representative) {

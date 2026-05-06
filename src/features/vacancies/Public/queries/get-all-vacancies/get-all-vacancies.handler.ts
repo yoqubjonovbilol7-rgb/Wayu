@@ -1,23 +1,34 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { EntityManager } from 'typeorm';
+import { plainToInstance } from 'class-transformer';
+
 import { Vacancies } from '@/features/vacancies/vacancies.entity';
 import { GetAllVacanciesPublicQuery } from './get-all-vacancies.query';
 import { GetAllVacanciesPublicResponse } from './get-all-vacancies.response';
-import { plainToInstance } from 'class-transformer';
+import type { IQueryHandler } from '@nestjs/cqrs';
+import { QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(GetAllVacanciesPublicQuery)
-export class GetAllVacanciesPublicHandler implements IQueryHandler<GetAllVacanciesPublicQuery> {
-  constructor(private readonly manager: EntityManager) {}
+export class GetAllVacanciesPublicHandler
+  implements IQueryHandler<GetAllVacanciesPublicQuery>
+{
+  async execute(
+    query: GetAllVacanciesPublicQuery,
+  ): Promise<GetAllVacanciesPublicResponse[]> {
+    const take = query.filters.size ?? 10;
+    const currentPage = query.filters.page ?? 1;
 
-  async execute(query: GetAllVacanciesPublicQuery): Promise<GetAllVacanciesPublicResponse> {
-    const { page = 1, size = 10 } = query.filters;
-    const [data, total] = await this.manager.findAndCount(Vacancies, {
-      take: size,
-      skip: (page - 1) * size,
-      where: { isActive: true },
-      order: { created: 'DESC' },
+    const skip = (currentPage - 1) * take;
+
+    const vacancies = await Vacancies.find({
+      where: {
+        isActive: true,
+      },
+      skip,
+      take,
+
     });
 
-    return plainToInstance(GetAllVacanciesPublicResponse, {data, total}, { excludeExtraneousValues: true });
+    return plainToInstance(GetAllVacanciesPublicResponse, vacancies, {
+      excludeExtraneousValues: true,
+    });
   }
 }

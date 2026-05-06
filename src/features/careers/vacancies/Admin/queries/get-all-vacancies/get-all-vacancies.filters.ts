@@ -1,5 +1,5 @@
 import {ApiProperty} from "@nestjs/swagger";
-import {IsInt, IsOptional, IsBoolean} from "class-validator";
+import {IsInt, IsOptional} from "class-validator";
 import {Type} from "class-transformer";
 
 export class GetAllVacanciesFilters {
@@ -14,10 +14,4 @@ export class GetAllVacanciesFilters {
     @IsOptional()
     @ApiProperty({required: false})
     size?: number;
-
-    @IsBoolean()
-    @IsOptional()
-    @Type(() => Boolean)
-    @ApiProperty({required: false})
-    isActive?: boolean;
 }
