@@ -12,10 +12,13 @@ import {InfoModule} from "@/features/info/info.module";
 import {CareersModule} from "@/features/careers/careers.module";
 import {VacanciesModule} from "@/features/vacancies/vacancies.module";
 
+import {UsersModule} from "./users/users.module";
+
 @Module({
     imports: [
         TypeOrmModule.forRoot(typeOrmConfig),
         CqrsModule.forRoot(),
+        UsersModule,
         NewsModule,
         LibraryModule,
         OrganizationModule,

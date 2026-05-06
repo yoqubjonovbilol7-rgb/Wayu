@@ -3,7 +3,7 @@ import {CreateNewsCategoryResponse} from "@/features/news/news-category/Admin/co
 
 
 export class CreateNewsCategoryCommand extends Command<CreateNewsCategoryResponse> {
-    constructor(public title : string, public imagePath?: string) {
+    constructor(public title : string) {
         super();
     }
 }

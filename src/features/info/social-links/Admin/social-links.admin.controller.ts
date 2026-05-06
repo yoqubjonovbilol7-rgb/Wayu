@@ -10,6 +10,7 @@ import {UpdateSocialLinksRequest} from "@/features/info/social-links/Admin/comma
 import {UpdateSocialLinksCommand} from "@/features/info/social-links/Admin/commands/update-social-links/update-social-links.command";
 import {GetAllSocialLinksFilters} from "@/features/info/social-links/Admin/queries/get-all-social-links/get-all-social-links.filters";
 import {GetAllSocialLinksQuery} from "@/features/info/social-links/Admin/queries/get-all-social-links/get-all-social-links.query";
+import {GetOneSocialLinkQuery} from "@/features/info/social-links/Admin/queries/get-one-social-links/get-one-social-links.query";
 
 
 @Controller('admin/social-links')
@@ -38,5 +39,10 @@ export class SocialLinksController {
   @Get()
   async getAll(@Query() filters : GetAllSocialLinksFilters){
     return await this.queryBus.execute(new GetAllSocialLinksQuery(filters))
+  }
+
+  @Get(':id')
+  async getOne(@Param('id',ParseIntPipe)id : number){
+    return await this.queryBus.execute(new GetOneSocialLinkQuery(id))
   }
 }

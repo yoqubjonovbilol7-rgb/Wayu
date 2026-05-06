@@ -10,6 +10,8 @@ import {UpdateEventsCategoryCommand} from "@/features/events/eventCategory/Admin
 import {GetAllEventsCategoriesResponse} from "@/features/events/eventCategory/Admin/queries/get-all-events-category/get-all-events-category.response";
 import {GetAllEventsCategoriesFilters} from "@/features/events/eventCategory/Admin/queries/get-all-events-category/get-all-events-category.filters";
 import {GetAllEventsCategoriesQuery} from "@/features/events/eventCategory/Admin/queries/get-all-events-category/get-all-events-category.query";
+import {GetOneEventCategoryQuery} from "@/features/events/eventCategory/Admin/queries/get-one-events-category/get-one-event-category.query";
+import {GetOneEventCategoryResponse} from "@/features/events/eventCategory/Admin/queries/get-one-events-category/get-one-event-category.response";
 
 @Controller('admin/events-category')
 export class EventsCategoryAdminController {
@@ -41,5 +43,11 @@ export class EventsCategoryAdminController {
     @ApiOkResponse({type: [GetAllEventsCategoriesResponse]})
     async getAllNewsCategories(@Query() filters: GetAllEventsCategoriesFilters) {
         return await this.queriesBus.execute(new GetAllEventsCategoriesQuery(filters));
+    }
+
+    @Get(':id')
+    @ApiOkResponse({ type: GetOneEventCategoryResponse })
+    async getOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.queriesBus.execute(new GetOneEventCategoryQuery(id));
     }
 }

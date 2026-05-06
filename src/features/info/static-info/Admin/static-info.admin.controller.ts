@@ -10,6 +10,7 @@ import {UpdateStaticInfoCommand} from "@/features/info/static-info/Admin/command
 import {GetAllStaticInfoResponse} from "@/features/info/static-info/Admin/queries/get-all-static-info/get-all-static-info.response";
 import {GetAllStaticInfoFilters} from "@/features/info/static-info/Admin/queries/get-all-static-info/get-all-static-info.filters";
 import {GetAllStaticInfoQuery} from "@/features/info/static-info/Admin/queries/get-all-static-info/get-all-static-info.query";
+import {GetOneStaticInfoQuery} from "@/features/info/static-info/Admin/queries/get-one-static-info/get-one-static-info.query";
 
 
 @Controller('admin/static-info')
@@ -39,5 +40,10 @@ export class StaticInfoAdminController {
   @ApiOkResponse({ type: [GetAllStaticInfoResponse] })
   async getAllStaticInfo(@Query() filters: GetAllStaticInfoFilters) {
     return await this.queriesBus.execute(new GetAllStaticInfoQuery(filters),);
+  }
+
+  @Get(':id')
+  async geOne(@Param('id',ParseIntPipe)id : number) {
+    return await this.queriesBus.execute(new GetOneStaticInfoQuery(id))
   }
 }

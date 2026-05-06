@@ -10,6 +10,7 @@ import {UpdateUsefulLinksRequest} from "@/features/info/useful-links/Admin/comma
 import {UpdateUsefulLinksCommand} from "@/features/info/useful-links/Admin/commands/update-useful-links/update-useful-links.command";
 import {GetAllUsefulLinksFilters} from "@/features/info/useful-links/Admin/queries/get-all-social-links/get-all-useful-links.filters";
 import {GetAllUsefulLinksQuery} from "@/features/info/useful-links/Admin/queries/get-all-social-links/get-all-useful-links.query";
+import {GetOneUsefulLinkQuery} from "@/features/info/useful-links/Admin/queries/get-one-social-links/get-one-useful-links.query";
 
 
 
@@ -36,6 +37,12 @@ export class UsefulLinksController {
   }
 
   @Get()
-  async getAll(@Query() filters: GetAllUsefulLinksFilters) {return await this.queryBus.execute(new GetAllUsefulLinksQuery(filters),);
+  async getAll(@Query() filters: GetAllUsefulLinksFilters) {
+    return await this.queryBus.execute(new GetAllUsefulLinksQuery(filters),);
+  }
+
+  @Get(':id')
+  async getOne(@Param('id',ParseIntPipe)id : number){
+    return await this.queryBus.execute(new GetOneUsefulLinkQuery(id))
   }
 }

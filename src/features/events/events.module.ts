@@ -12,6 +12,7 @@ import {UpdateEventsCategoryHandler} from "@/features/events/eventCategory/Admin
 import {GetAllEventsCategoriesHandler} from "@/features/events/eventCategory/Admin/queries/get-all-events-category/get-all-events-category.handler";
 import {Events} from "@/features/events/event/event.entity";
 import {EventCategories} from "@/features/events/eventCategory/eventCategories.entity";
+import {GetOneEventCategoryHandler} from "@/features/events/eventCategory/Admin/queries/get-one-events-category/get-one-event-category.handler";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Events, EventCategories])],
@@ -27,7 +28,8 @@ import {EventCategories} from "@/features/events/eventCategory/eventCategories.e
         CreateEventsCategoryHandler,
         DeleteEventsCategoryHandler,
         UpdateEventsCategoryHandler,
-        GetAllEventsCategoriesHandler
+        GetAllEventsCategoriesHandler,
+        GetOneEventCategoryHandler
     ]
 })
 

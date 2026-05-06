@@ -22,6 +22,8 @@ import {UpdateEventsRequest} from "@/features/events/event/Admin/commands/update
 import {GetAllEventsResponse} from "@/features/events/event/Admin/queries/get.all.event/get-all-events.response";
 import {GetAllEventsFilters} from "@/features/events/event/Admin/queries/get.all.event/get-all-events.filters";
 import {GetAllEventsQuery} from "@/features/events/event/Admin/queries/get.all.event/get-all-events.query";
+import {GetOneEventsResponse} from "@/features/events/event/Admin/queries/get.one.event/get-one-events.response";
+import {GetOneEventsQuery} from "@/features/events/event/Admin/queries/get.one.event/get-one-events.query";
 
 @Controller('admin/events')
 export class EventsController {
@@ -93,6 +95,12 @@ export class EventsController {
     @ApiOkResponse({type :GetAllEventsResponse})
     async getALlEvents(@Query() filters : GetAllEventsFilters) {
         return await this.queryBus.execute(new GetAllEventsQuery(filters))
+    }
+
+    @Get(':id')
+    @ApiOkResponse({ type: GetOneEventsResponse })
+    async getOne(@Param('id', ParseIntPipe) id: number) {
+      return await this.queryBus.execute(new GetOneEventsQuery(id));
     }
 
 }

@@ -9,7 +9,7 @@ export class CreateRepresentativesCommand extends Command<CreateRepresentativesR
         public readonly image: Express.Multer.File,
         public readonly email: string,
         public readonly phoneNumber: string,
-        public readonly resume: string,
+        public readonly resume: string
     ) {
         super();
     }

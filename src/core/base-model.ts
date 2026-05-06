@@ -4,9 +4,9 @@ export abstract class BaseModel extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @CreateDateColumn({ type: 'timestamptz' })
+    @CreateDateColumn()
     created!: string;
 
-    @UpdateDateColumn({ type: 'timestamptz', nullable: true })
+    @UpdateDateColumn({ nullable: true })
     updated?: string;
 }

@@ -14,7 +14,7 @@ export class CreateNewsCategoryHandler implements ICommandHandler<CreateNewsCate
         if (alreadyExists)
             throw new BadRequestException("Title is already taken");
 
-        const newNewsCategory = NewsCategories.create({title: command.title, image: command.imagePath} as NewsCategories);
+        const newNewsCategory = NewsCategories.create({title: command.title} as NewsCategories);
         await NewsCategories.save(newNewsCategory);
 
         return plainToInstance(CreateNewsCategoryResponse, newNewsCategory, {excludeExtraneousValues: true});

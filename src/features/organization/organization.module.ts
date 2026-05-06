@@ -17,6 +17,9 @@ import {GetOneCountriesHandler} from "@/features/organization/countries/Admin/qu
 import {GetAllCountriesHandler} from "@/features/organization/countries/Admin/queries/get-all-counries/get-all-countries.handler";
 import {DeleteBranchHandler} from "@/features/organization/branches/Admin/command/delete-branches/delete-branches.handler";
 import {GetAllBranchesHandler} from "@/features/organization/branches/Admin/queries/get-all-branches/get-all-branches.handler";
+import {UpdateRepresentativeHandler} from "@/features/organization/representatives/Admin/commands/update-representatives/update-representatives.handler";
+import {UpdateBranchesHandler} from "@/features/organization/branches/Admin/command/update-branches/update-branches.handler";
+import {GetOneBranchHandler} from "@/features/organization/branches/Admin/queries/get-one-branches/get-one-branches.handler";
 
 
 @Module({
@@ -48,11 +51,14 @@ import {GetAllBranchesHandler} from "@/features/organization/branches/Admin/quer
         CreateBranchesHandler,
         DeleteBranchHandler,
         GetAllBranchesHandler,
+        UpdateBranchesHandler,
+        GetOneBranchHandler,
 
 
         CreateRepresentativesHandler,
         GetAllRepresentativesPublicHandler,
-        GetOneRepresentativePublicHandler
+        GetOneRepresentativePublicHandler,
+        UpdateRepresentativeHandler
 
     ]
 

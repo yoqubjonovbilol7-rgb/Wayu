@@ -28,9 +28,12 @@ import { GetAllApplicationsQuery } from "./queries/get-all-applications/get-all-
 import { GetAllApplicationsResponse } from "./queries/get-all-applications/get-all-applications.response";
 import { GetOneApplicationsQuery } from "./queries/get-one-applications/get-one-applications.query";
 import { GetOneApplicationsResponse } from "./queries/get-one-applications/get-one-applications.response";
+import {Role} from "@/core/enums/role.enum";
+import {Roles} from "@/core/decorators/roles.decorator";
 
 
 @Controller("admin/applications")
+@Roles(Role.Admin,Role.SuperAdmin)
 export class ApplicationsController {
   constructor(
     private readonly commandBus: CommandBus,

@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query} from "@nestjs/common";
 import {CommandBus, QueryBus} from "@nestjs/cqrs";
 import {CreateBranchesRequest} from "@/features/organization/branches/Admin/command/create-branches/create-branches.request";
 import {CreateBranchesResponse} from "@/features/organization/branches/Admin/command/create-branches/create-branches.response";
@@ -14,6 +14,10 @@ import {
 import {
     GetAllBranchesQuery
 } from "@/features/organization/branches/Admin/queries/get-all-branches/get-all-branches.query";
+import {UpdateBranchRequest} from "@/features/organization/branches/Admin/command/update-branches/update-branches.request";
+import {UpdateBranchesCommand} from "@/features/organization/branches/Admin/command/update-branches/update-branches.command";
+import {GetOneBranchResponse} from "@/features/organization/branches/Admin/queries/get-one-branches/get-one-branches.response";
+import {GetOneBranchesQuery} from "@/features/organization/branches/Admin/queries/get-one-branches/get-one-branches.query";
 
 @Controller('admin/branches')
 export class BranchesAdminController {
@@ -21,7 +25,7 @@ export class BranchesAdminController {
         private readonly commandBus : CommandBus,
         private readonly queryBus : QueryBus
     ) {}
-    @Post()
+  @Post()
     async createBranches(@Body() cmd: CreateBranchesRequest): Promise<CreateBranchesResponse> {
         return await this.commandBus.execute(
             new CreateBranchesCommand(
@@ -36,7 +40,6 @@ export class BranchesAdminController {
     }
 
 
-
     @Delete(':id')
     async deleteBranches(@Param('id',ParseIntPipe) id : number){
         return await this.commandBus.execute(new  DeleteBranchesCommand(id))
@@ -47,4 +50,26 @@ export class BranchesAdminController {
     async getAllBranches(@Query()filters: GetAllBranchesFilters){
         return await this.queryBus.execute(new GetAllBranchesQuery(filters))
     }
+
+    @Patch(':id')
+    async update(@Param('id', ParseIntPipe) id: number, @Body() payload: UpdateBranchRequest) {
+      const command = new UpdateBranchesCommand(
+        id,
+        payload.countryId,
+        payload.representativeId,
+        payload.city,
+        payload.latitude,
+        payload.longitude,
+        payload.phoneNumber
+      );
+
+      return await this.commandBus.execute(command);
+
+    }
+
+  @Get(':id')
+  @ApiOkResponse({ type: GetOneBranchResponse })
+  async getOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.queryBus.execute(new GetOneBranchesQuery(id));
+  }
 }

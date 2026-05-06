@@ -27,6 +27,9 @@ import {GetOneUsefulLinkPublicHandler} from "@/features/info/useful-links/Public
 import {StaticInfo} from "@/features/info/static-info/staticInfo.entity";
 import {SocialLinks} from "@/features/info/social-links/socialLinks.entity";
 import {UsefulLinks} from "@/features/info/useful-links/usefulLinks.entity";
+import {GetOneUsefulLinkHandler} from "@/features/info/useful-links/Admin/queries/get-one-social-links/get-one-useful-links.handler";
+import {GetOneSocialLinkHandler} from "@/features/info/social-links/Admin/queries/get-one-social-links/get-one-social-links.handler";
+import {GetOneStaticInfoHandler} from "@/features/info/static-info/Admin/queries/get-one-static-info/get-one-static-info.handler";
 
 @Module({
   imports: [TypeOrmModule.forFeature([StaticInfo, SocialLinks, UsefulLinks])],
@@ -45,6 +48,8 @@ import {UsefulLinks} from "@/features/info/useful-links/usefulLinks.entity";
     DeleteStaticInfoHandler,
     GetAllStaticInfoHandler,
     UpdateStaticInfoHandler,
+    GetOneStaticInfoHandler,
+
     GetAllStaticInfoPublicHandler,
     GetOneStaticInfoPublicHandler,
 
@@ -52,13 +57,16 @@ import {UsefulLinks} from "@/features/info/useful-links/usefulLinks.entity";
 
     CreateSocialLinksHandler,
     DeleteSocialLinksHandler,
+    GetOneSocialLinkHandler,
     UpdateSocialLinksHandler,
     GetAllSocialLinksHandler,
+
     GetAllSocialLinksPublicHandler,
     GetOneSocialLinkPublicHandler,
 
 
     CreateUsefulLinksHandler,
+    GetOneUsefulLinkHandler,
     DeleteUsefulLinksHandler,
     UpdateUsefulLinksHandler,
     GetAllUsefulLinksHandler,
