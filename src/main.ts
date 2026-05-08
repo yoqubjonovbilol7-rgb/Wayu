@@ -1,26 +1,28 @@
-import 'dotenv/config';
-import {NestFactory} from "@nestjs/core";
-import {NestExpressApplication} from "@nestjs/platform-express";
-import {configureSwagger} from "@/config/swagger.config";
-import {AppModule} from "@/app.module";
-import {join} from "path";
-import {ValidationPipe} from "@nestjs/common";
+import 'dotenv/config'
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+import { configureSwagger } from './config/swagger.config';
+import {NestExpressApplication} from '@nestjs/platform-express';
+import { join } from 'path'
+import morgan from "morgan";
 
 
 async function bootstrap() {
 
-    const app = await NestFactory.create<NestExpressApplication>(AppModule);
-    configureSwagger(app);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-    app.useGlobalPipes(new ValidationPipe({
-        whitelist: true,
-        transform: true,
-        forbidNonWhitelisted: true,
-    }));
+  app.enableCors({origin: '*'})
+  configureSwagger(app)
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true
+  }));
+  app.use(morgan('dev'))
 
-    await app.listen(3000, () => console.log("Server is up and running"));
+  app.useStaticAssets(join(__dirname,'..','uploads'),{prefix: '/uploads/'})
 
-    app.useStaticAssets(join(__dirname, '..', 'uploads'));
+  await app.listen(process.env.PORT ?? 3000);
 }
-
 bootstrap();

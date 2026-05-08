@@ -1,29 +1,38 @@
-import {CanActivate, ExecutionContext, ForbiddenException, Injectable, UnauthorizedException} from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { Reflector } from '@nestjs/core';
-import { RolesKey } from '../decorators/roles.decorator';
-import { Role } from '../enums/role.enum';
+import {CanActivate, ExecutionContext, ForbiddenException, Injectable, UnauthorizedException} from "@nestjs/common";
+import {Reflector} from "@nestjs/core";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  constructor(private reflector: Reflector) { }
 
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    let roles = this.reflector.getAllAndOverride<Role[]>(RolesKey, [context.getHandler(), context.getClass()]);
-    if (!roles) {
-      return true;
+  canActivate(context: ExecutionContext): boolean {
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>(
+      "roles",
+      [
+        context.getHandler(),
+        context.getClass()
+      ]
+    )
+
+    if (!requiredRoles || requiredRoles.length === 0) {
+      return true
     }
 
-    let { user } = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest()
+    const user = request.user
 
     if (!user) {
-      throw new UnauthorizedException('Credentials were not found');
+      throw new UnauthorizedException("User topilmadi (RolesGuard)");
     }
 
-    if (!roles.includes(user.role)){
-      throw new ForbiddenException()
+    const hasRole = requiredRoles.some(
+      (role) => role.toUpperCase() === user.role?.toUpperCase()
+    );
+
+    if (!hasRole) {
+      throw new ForbiddenException("Sizda ushbu amal uchun huquq yo'q");
     }
 
-    return true;
+    return true
   }
 }
